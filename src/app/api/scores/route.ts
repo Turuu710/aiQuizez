@@ -1,24 +1,23 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
 
 export async function POST(request: Request) {
   try {
-    const quiz = await prisma.quiz.create({
+    const scoreData = await request.json();
+    const { userId, quizId, score } = scoreData;
+    const newScore = await prisma.userScore.create({
       data: {
-        id: Date.now().toString(),
-        question: "",
-        options: [],
-        answer: "",
-        articleId: "",
+        userId,
+        quizId,
+        score,
       },
     });
-    return NextResponse.json(
-      { message: "Quiz create success", quiz },
-      { status: 200 },
-    );
+    return NextResponse.json(newScore, { status: 201 });
   } catch (error) {
-    return new Response("Not available to create user!!!", { status: 400 });
+    return NextResponse.json(
+      { error: "Failed to create score" },
+      { status: 500 },
+    );
   }
 }
 
