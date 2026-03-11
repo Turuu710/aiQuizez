@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "prisma-push": "npx prisma db push",
+    "prisma-generate": "npx prisma generate",
+    "prisma-studio": "npx prisma studio"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.10.3",
