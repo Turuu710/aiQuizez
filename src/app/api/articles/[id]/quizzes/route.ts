@@ -11,7 +11,7 @@ export async function POST(
       where: { id },
     });
 
-    return NextResponse.json({ article });
+    return NextResponse.json({ article }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to create quiz" },
