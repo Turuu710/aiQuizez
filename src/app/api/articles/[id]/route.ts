@@ -4,8 +4,8 @@ export async function GET(
   request: Request,
   { params }: { params: { id: string } },
 ) {
+  const { id } = params;
   try {
-    const { id } = params;
     return NextResponse.json(
       { message: `Get quizzes for article ${id}` },
       { status: 200 },
