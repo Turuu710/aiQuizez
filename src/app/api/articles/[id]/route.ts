@@ -1,16 +1,17 @@
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(
-  request: Request,
+  req: Request,
   { params }: { params: { id: string } },
 ) {
-  const { id } = params;
-  try {
-    return NextResponse.json(
-      { message: `Get quizzes for article ${id}` },
-      { status: 200 },
-    );
-  } catch (error) {
-    return new Response("Not available to get quizzes!!!", { status: 400 });
-  }
+  const articleId = params.id;
+
+  const quizzes = await prisma.quiz.findMany({
+    where: {
+      articleId: articleId,
+    },
+  });
+
+  return Response.json(quizzes);
 }
