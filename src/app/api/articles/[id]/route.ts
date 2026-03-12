@@ -5,13 +5,13 @@ export async function GET(
   req: Request,
   { params }: { params: { id: string } },
 ) {
-  const articleId = params.id;
+  // const articleId = params.id;
 
-  const quizzes = await prisma.quiz.findMany({
-    where: {
-      articleId: articleId,
-    },
-  });
+  // const quizzes = await prisma.quiz.findMany({
+  //   where: {
+  //     articleId: articleId,
+  //   },
+  // });
 
-  return Response.json(quizzes);
+  // return Response.json(quizzes);
 }
